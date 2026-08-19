@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cholesterol: From Molecule to Management</title>
+<meta name="description" content="A tiered, evidence-anchored course in lipid biology, dyslipidaemia and lipid-lowering therapy. Global core with a dedicated India module. Evidence current to August 2026.">
+<meta name="theme-color" content="#10243d" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1622" media="(prefers-color-scheme: dark)">
+
+<!-- Installable web app -->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cholesterol">
+<link rel="apple-touch-icon" href="icon.svg">
+
+<!-- Open Graph: makes shared links render properly in WhatsApp, Telegram, LinkedIn -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cholesterol: From Molecule to Management">
+<meta property="og:description" content="From the mevalonate pathway to the 2026 ACC/AHA guideline. Three depth tiers in one course. Free, open, works offline.">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="hdr">
+  <button class="icon-btn" id="menuBtn" aria-label="Open course menu">&#9776;</button>
+  <a class="hdr-brand" href="#/">
+    <span class="mark" aria-hidden="true"></span>
+    <span class="full">Cholesterol: From Molecule to Management</span>
+    <span class="abbr">Cholesterol</span>
+  </a>
+  <span class="hdr-spacer"></span>
+  <div class="hdr-search">
+    <input type="search" id="search" placeholder="Search the course…" aria-label="Search the course" autocomplete="off">
+    <div class="search-results" id="searchResults"></div>
+  </div>
+  <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode">&#9789;</button>
+</header>
+
+<div class="tierbar" id="tierbar"></div>
+
+<div class="scrim" id="scrim"></div>
+
+<div class="shell">
+  <nav class="sidebar" id="sidebar" aria-label="Course navigation"></nav>
+  <main class="main" id="main">
+    <div class="wrap"><p class="muted">Loading course…</p></div>
+  </main>
+</div>
+
+<button class="fab" id="topBtn" aria-label="Back to top" title="Back to top">&#8593;</button>
+
+<div id="installBar" role="dialog" aria-label="Install this course">
+  <span class="txt"><b>Install for offline study</b><span>Add to your home screen — works without data</span></span>
+  <button class="go" id="installGo">Install</button>
+  <button class="no" id="installNo" aria-label="Dismiss">&times;</button>
+</div>
+
+<noscript>
+  <div style="padding:30px;max-width:700px;margin:0 auto;font-family:Georgia,serif">
+    <h2>JavaScript is required</h2>
+    <p>This course uses JavaScript for the depth tiers, quizzes, interactive tools and progress tracking. Everything runs locally in your browser — nothing is uploaded anywhere. Please enable JavaScript and reload.</p>
+  </div>
+</noscript>
+
+<script src="assets/content-a.js"></script>
+<script src="assets/content-b.js"></script>
+<script src="assets/course.js"></script>
+<script src="assets/tools.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

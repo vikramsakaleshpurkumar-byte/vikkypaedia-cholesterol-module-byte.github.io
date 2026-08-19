@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Cholesterol course icon">
+  <!-- Full-bleed background so the icon survives maskable cropping on Android -->
+  <rect width="512" height="512" fill="#10243d"/>
+
+  <!-- Lipoprotein particle: hydrophobic core inside an amphipathic shell -->
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#c2751a" stroke-width="16" opacity="0.55"/>
+  <circle cx="256" cy="256" r="112" fill="#c2751a" opacity="0.16"/>
+
+  <!-- Surface apolipoproteins -->
+  <circle cx="256" cy="106" r="19" fill="#c2751a"/>
+  <circle cx="362" cy="150" r="14" fill="#c2751a" opacity="0.85"/>
+  <circle cx="406" cy="256" r="14" fill="#c2751a" opacity="0.7"/>
+  <circle cx="362" cy="362" r="14" fill="#c2751a" opacity="0.85"/>
+  <circle cx="256" cy="406" r="14" fill="#c2751a" opacity="0.7"/>
+  <circle cx="150" cy="362" r="14" fill="#c2751a" opacity="0.85"/>
+  <circle cx="106" cy="256" r="14" fill="#c2751a" opacity="0.7"/>
+  <circle cx="150" cy="150" r="14" fill="#c2751a" opacity="0.85"/>
+
+  <!-- Sterol nucleus: four fused rings, stylised -->
+  <g fill="none" stroke="#f7d9a8" stroke-width="15" stroke-linejoin="round">
+    <polygon points="188,236 214,214 246,230 244,264 212,278 186,264"/>
+    <polygon points="246,230 278,212 310,228 308,262 276,276 244,264"/>
+    <polygon points="310,228 340,242 336,274 308,262"/>
+  </g>
+  <circle cx="176" cy="222" r="12" fill="#f7d9a8"/>
+</svg>

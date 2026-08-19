@@ -1,0 +1,32 @@
+{
+  "name": "Cholesterol: From Molecule to Management",
+  "short_name": "Cholesterol",
+  "description": "A tiered, evidence-anchored course in lipid biology, dyslipidaemia and lipid-lowering therapy. Global core with a dedicated India module.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f7f6f3",
+  "theme_color": "#10243d",
+  "lang": "en",
+  "categories": ["education", "medical"],
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    { "name": "Start at Module 1", "url": "./#/module/1" },
+    { "name": "Guideline comparison", "url": "./#/module/13" },
+    { "name": "Capstone cases", "url": "./#/capstone" }
+  ]
+}

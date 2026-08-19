@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Self-test — Cholesterol MOOC</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<style>
+  body{font:15px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:780px;margin:0 auto;padding:28px 20px;background:#f7f6f3;color:#14181d}
+  h1{font-size:23px;margin:0 0 4px}
+  p.sub{color:#6a7280;margin:0 0 22px}
+  .row{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border-radius:6px;margin-bottom:6px;background:#fff;border:1px solid #ddd8d0}
+  .row.pass{border-left:4px solid #15803d}
+  .row.fail{border-left:4px solid #b91c1c;background:#fdeaea}
+  .tag{font-weight:700;font-size:11px;letter-spacing:.06em;flex:none;width:46px}
+  .pass .tag{color:#15803d}.fail .tag{color:#b91c1c}
+  .sum{padding:14px 16px;border-radius:8px;margin:20px 0;font-weight:600}
+  .sum.ok{background:#e7f5ec;border:1px solid #15803d;color:#15803d}
+  .sum.bad{background:#fdeaea;border:1px solid #b91c1c;color:#b91c1c}
+  code{background:#f1efea;padding:1px 5px;border-radius:4px;font-size:.9em}
+  a{color:#2c5580}
+</style>
+</head>
+<body>
+
+<h1>Course self-test</h1>
+<p class="sub">Open this page after editing any content file. It loads every script and checks structural integrity. If a script has a syntax error, the checks below will fail and your browser console will name the file and line.</p>
+
+<div id="out"></div>
+<div id="sum"></div>
+
+<p style="margin-top:24px"><a href="index.html">&larr; Back to the course</a></p>
+
+<script src="assets/content-a.js" onerror="window.__loadFail='content-a.js'"></script>
+<script src="assets/content-b.js" onerror="window.__loadFail='content-b.js'"></script>
+<script src="assets/course.js" onerror="window.__loadFail='course.js'"></script>
+<script src="assets/tools.js" onerror="window.__loadFail='tools.js'"></script>
+<script>
+(function(){
+  const out = document.getElementById('out');
+  let pass = 0, fail = 0;
+  function t(name, fn){
+    let ok = false, detail = '';
+    try { const r = fn(); ok = r === true || r === undefined; if (typeof r === 'string') { ok = false; detail = r; } }
+    catch(e){ ok = false; detail = e.message; }
+    ok ? pass++ : fail++;
+    out.insertAdjacentHTML('beforeend',
+      `<div class="row ${ok?'pass':'fail'}"><span class="tag">${ok?'PASS':'FAIL'}</span><span>${name}${detail?' — <code>'+detail+'</code>':''}</span></div>`);
+  }
+
+  t('All four data scripts parsed and loaded', () => {
+    if (window.__loadFail) return 'failed to load ' + window.__loadFail;
+    if (!window.MODULES) return 'window.MODULES missing — syntax error in content-a.js or content-b.js';
+    if (!window.COURSE)  return 'window.COURSE missing — syntax error in course.js';
+    if (!window.TOOLS)   return 'window.TOOLS missing — syntax error in tools.js';
+    if (!window.FIGURES) return 'window.FIGURES missing';
+    if (!window.CAPSTONE) return 'window.CAPSTONE missing';
+    return true;
+  });
+
+  if (!window.MODULES) { render(); return; }
+
+  t('14 modules present, numbered 1-14 without gaps', () => {
+    const ids = MODULES.map(m => m.id).sort((a,b)=>a-b);
+    if (ids.length !== 14) return ids.length + ' modules found';
+    for (let i=0;i<14;i++) if (ids[i] !== i+1) return 'gap or duplicate at position ' + (i+1);
+    return true;
+  });
+
+  t('Every module has title, tagline, hook, time and part', () => {
+    for (const m of MODULES)
+      for (const k of ['title','tagline','hook','time','part'])
+        if (!m[k]) return `module ${m.id} missing ${k}`;
+    return true;
+  });
+
+  t('Every part number maps to a defined part', () => {
+    const ok = COURSE.parts.map(p => p.n);
+    for (const m of MODULES) if (!ok.includes(m.part)) return `module ${m.id} has unknown part ${m.part}`;
+    return true;
+  });
+
+  t('Every objective, section, reading and quiz item has a valid tier (1-3)', () => {
+    for (const m of MODULES){
+      for (const o of m.objectives) if (![1,2,3].includes(o.tier)) return `module ${m.id} objective tier ${o.tier}`;
+      for (const s of m.sections) if (!s.tool && !s.figure && ![1,2,3].includes(s.tier)) return `module ${m.id} section tier ${s.tier}`;
+      for (const r of m.readings) if (![1,2,3].includes(r.tier)) return `module ${m.id} reading tier ${r.tier}`;
+      for (const q of m.quiz) if (![1,2,3].includes(q.tier)) return `module ${m.id} quiz tier ${q.tier}`;
+    }
+    return true;
+  });
+
+  t('Every module has at least one Tier 1 section (so Tier-1-only mode is never empty)', () => {
+    for (const m of MODULES)
+      if (!m.sections.some(s => s.tier === 1)) return `module ${m.id} has no Tier 1 section`;
+    return true;
+  });
+
+  t('Every quiz item has 4 options, a valid answer index, and 4 explanations', () => {
+    for (const m of MODULES) m.quiz.forEach((q,i) => {
+      if (!Array.isArray(q.opts) || q.opts.length !== 4) throw new Error(`module ${m.id} q${i+1}: ${q.opts?q.opts.length:0} options`);
+      if (!Number.isInteger(q.a) || q.a < 0 || q.a > 3) throw new Error(`module ${m.id} q${i+1}: answer index ${q.a}`);
+      if (!Array.isArray(q.why) || q.why.length !== 4) throw new Error(`module ${m.id} q${i+1}: ${q.why?q.why.length:0} explanations, need 4`);
+      q.why.forEach((w,j) => { if (!w || w.length < 15) throw new Error(`module ${m.id} q${i+1} option ${'ABCD'[j]}: explanation too short`); });
+    });
+    return true;
+  });
+
+  t('Every referenced tool exists in tools.js', () => {
+    for (const m of MODULES) for (const s of m.sections)
+      if (s.tool && !window.TOOLS[s.tool]) return `module ${m.id} references missing tool "${s.tool}"`;
+    return true;
+  });
+
+  t('Every referenced figure exists in course.js', () => {
+    for (const m of MODULES) for (const s of m.sections)
+      if (s.figure && !window.FIGURES[s.figure]) return `module ${m.id} references missing figure "${s.figure}"`;
+    return true;
+  });
+
+  t('Every tool has title, tag, html and init', () => {
+    for (const k in window.TOOLS){
+      const T = window.TOOLS[k];
+      for (const f of ['title','tag','html','init']) if (T[f] === undefined) return `tool "${k}" missing ${f}`;
+      if (typeof T.init !== 'function') return `tool "${k}" init is not a function`;
+    }
+    return true;
+  });
+
+  t('Every tool is actually placed in a module (none orphaned)', () => {
+    const used = new Set();
+    MODULES.forEach(m => m.sections.forEach(s => s.tool && used.add(s.tool)));
+    const orphans = Object.keys(window.TOOLS).filter(k => !used.has(k));
+    return orphans.length ? 'unused: ' + orphans.join(', ') : true;
+  });
+
+  t('Every module has a "what we still do not know" note', () => {
+    for (const m of MODULES) if (!m.unknown) return `module ${m.id} missing`;
+    return true;
+  });
+
+  t('Capstone has 8 cases with valid tiers and tasks', () => {
+    if (CAPSTONE.length !== 8) return CAPSTONE.length + ' cases';
+    for (const c of CAPSTONE){
+      if (![1,2,3].includes(c.tier)) return `case ${c.n} tier ${c.tier}`;
+      if (!c.asks || !c.asks.length) return `case ${c.n} has no tasks`;
+    }
+    return true;
+  });
+
+  t('Reference library groups all have items with citations', () => {
+    for (const g of window.REFERENCES){
+      if (!g.items || !g.items.length) return `group "${g.group}" empty`;
+      for (const i of g.items) if (!i.cite) return `group "${g.group}" has an item without a citation`;
+    }
+    return true;
+  });
+
+  t('Verification notes present (pending items are expected, not a failure)', () => {
+    if (!window.VERIFY_NOTES || !VERIFY_NOTES.pending) return 'missing';
+    return true;
+  });
+
+  t('No unescaped template-literal markers left in content HTML', () => {
+    for (const m of MODULES) for (const s of m.sections)
+      if (s.html && s.html.includes('${')) return `module ${m.id} section "${s.h}" contains an unresolved placeholder`;
+    return true;
+  });
+
+  render();
+
+  // These four need a real server (fetch is blocked on file://).
+  // app.js in particular cannot be executed here — it expects the course DOM —
+  // so we parse-check it with new Function() without running it.
+  if (location.protocol.startsWith('http')) {
+    Promise.all([
+      fetch('assets/app.js').then(r => r.text()).then(src => {
+        try { new Function(src); t('app.js parses without syntax errors', () => true); }
+        catch (e) { t('app.js parses without syntax errors', () => e.message); }
+      }).catch(() => t('app.js reachable', () => 'could not fetch assets/app.js')),
+
+      fetch('manifest.webmanifest').then(r => r.json()).then(mf => {
+        t('manifest.webmanifest is present and valid JSON', () => {
+          if (!mf.name) return 'no name field';
+          if (!mf.icons || !mf.icons.length) return 'no icons declared';
+          if (mf.start_url !== './') return 'start_url should be "./" so the app works at any subpath';
+          return true;
+        });
+      }).catch(() => t('manifest.webmanifest present', () => 'missing or invalid JSON — phones will not offer to install')),
+
+      fetch('sw.js').then(r => r.text()).then(src => {
+        t('sw.js present, parses, and caches every shell file', () => {
+          try { new Function(src); } catch (e) { return e.message; }
+          const need = ['index.html','assets/style.css','assets/content-a.js','assets/content-b.js',
+                        'assets/course.js','assets/tools.js','assets/app.js'];
+          const missing = need.filter(f => !src.includes(f));
+          if (missing.length) return 'not cached for offline use: ' + missing.join(', ');
+          if (!/CACHE_VERSION\s*=\s*'v\d+'/.test(src)) return 'CACHE_VERSION missing — you will not be able to push updates to learners';
+          return true;
+        });
+      }).catch(() => t('sw.js present', () => 'missing — offline study will not work')),
+
+      fetch('icon.svg').then(r => {
+        t('icon.svg present', () => r.ok ? true : 'returned ' + r.status);
+      }).catch(() => t('icon.svg present', () => 'missing — home-screen icon will fall back to a default'))
+    ]).then(render);
+  } else {
+    out.insertAdjacentHTML('beforeend',
+      '<div class="row"><span class="tag">SKIP</span><span>4 further checks (app.js syntax, manifest, service worker, icon) need a server &mdash; run <code>serve.bat</code> and open <code>http://localhost:8080/check.html</code>, or check the live site after deploying</span></div>');
+  }
+
+  function render(){
+    const total = pass + fail;
+    const s = document.getElementById('sum');
+    s.className = 'sum ' + (fail ? 'bad' : 'ok');
+    s.textContent = fail
+      ? `${fail} of ${total} checks failed. Open the browser console (F12) — a syntax error names the exact file and line.`
+      : `All ${total} checks passed. ${window.MODULES ? MODULES.length + ' modules, ' + MODULES.reduce((a,m)=>a+m.quiz.length,0) + ' quiz items, ' + Object.keys(window.TOOLS).length + ' tools.' : ''}`;
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+Cholesterol: From Molecule to Management
+Copyright (c) 2026 — add your name here
+
+EDUCATIONAL CONTENT (all text, figures, quiz items, case material)
+-----------------------------------------------------------------
+Licensed under the Creative Commons Attribution-NonCommercial 4.0
+International License (CC BY-NC 4.0).
+
+You are free to:
+  Share  — copy and redistribute the material in any medium or format
+  Adapt  — remix, transform, and build upon the material
+
+Under the following terms:
+  Attribution   — You must give appropriate credit, provide a link to the
+                  license, and indicate if changes were made.
+  NonCommercial — You may not use the material for commercial purposes.
+
+Full licence text: https://creativecommons.org/licenses/by-nc/4.0/legalcode
+
+Adaptation for other countries is explicitly encouraged. Module 13 is the
+template: substitute your own prevalence data, population phenotype,
+national guideline and drug prices, and the reasoning transfers intact.
+
+
+SOFTWARE (index.html, check.html, assets/app.js, assets/tools.js,
+assets/style.css, serve.bat, serve.sh)
+-----------------------------------------------------------------
+Licensed under the MIT License.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+MEDICAL DISCLAIMER
+-----------------------------------------------------------------
+This course is an educational resource for health professionals and students.
+It is not clinical decision support and must not be used to direct the care of
+an individual patient. The interactive tools are teaching objects: where a
+validated clinical calculator exists, the tools deliberately do not reproduce
+it and instead direct the learner to the official instrument. Guideline
+thresholds, drug doses and trial results are current to August 2026 and will
+become outdated — see the maintenance schedule and verification log at the
+About page within the course. Always consult the primary guideline document
+and the current product information before treating a patient.

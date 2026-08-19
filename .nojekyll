@@ -1,0 +1,5 @@
+This empty file tells GitHub Pages to skip Jekyll processing.
+Without it, Pages runs a Jekyll build that ignores any file or folder
+beginning with an underscore and adds a delay to every deploy.
+This course is plain static HTML, CSS and JS, so Jekyll has nothing to do.
+Keep this file in the repository root of whatever you publish.
