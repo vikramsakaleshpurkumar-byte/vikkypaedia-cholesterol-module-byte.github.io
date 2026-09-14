@@ -115,5 +115,5 @@ If you ever outgrow it, the same folder deploys unchanged to Cloudflare Pages or
 
 - [ ] A `LICENSE` file — one is included (CC BY-NC 4.0). Change it if you want different terms.
 - [ ] Your name, institution and contact on the About page (`assets/course.js`, or add it to the About view in `app.js`).
-- [ ] Work through the pending-verification list at `#/about` — Lp(a)HORIZON in particular — before you announce it.
+- [ ] Review the evidence-status list at `#/about` before announcing an updated release.
 - [ ] Add repo **Topics** on GitHub (`medical-education`, `cardiology`, `lipidology`, `mooc`, `open-educational-resources`) so people can find it.

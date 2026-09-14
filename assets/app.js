@@ -31,10 +31,18 @@
   const tierOn = (t) => state.tiers.includes(t);
   const badge = (t) => `<span class="badge t${t}">${C.tiers[t].short}</span>`;
   const mod = (n) => MODS.find(m => m.id === n);
+  const answerCorrect = (v) => v === true || (v && v.correct === true);
+  const pathwayMinutes = (tiers) => MODS.reduce((total, m) =>
+    total + tiers.reduce((sum, t) => sum + (m.time['t' + t] || 0), 0), 0);
+  const duration = (minutes) => minutes < 90 ? `${minutes} min` : `${Math.round(minutes / 60)} hours`;
 
   function toast(msg) {
     let t = el('toast');
-    if (!t) { t = document.createElement('div'); t.id = 'toast'; t.className = 'toast'; document.body.appendChild(t); }
+    if (!t) {
+      t = document.createElement('div'); t.id = 'toast'; t.className = 'toast';
+      t.setAttribute('role', 'status'); t.setAttribute('aria-live', 'polite');
+      document.body.appendChild(t);
+    }
     t.textContent = msg; t.classList.add('on');
     clearTimeout(t._x); t._x = setTimeout(() => t.classList.remove('on'), 2600);
   }
@@ -45,7 +53,7 @@
     const rel = m.quiz.filter(q => tierOn(q.tier));
     const rec = state.quiz[id] || {};
     let correct = 0;
-    rel.forEach((q, i) => { const gi = m.quiz.indexOf(q); if (rec[gi] === true) correct++; });
+    rel.forEach(q => { const gi = m.quiz.indexOf(q); if (answerCorrect(rec[gi])) correct++; });
     return { total: rel.length, correct };
   }
 
@@ -61,7 +69,7 @@
       m.quiz.forEach((q, i) => {
         if (!tierOn(q.tier)) return;
         t++;
-        if ((state.quiz[m.id] || {})[i] === true) c++;
+        if (answerCorrect((state.quiz[m.id] || {})[i])) c++;
       });
     });
     return { t, c, pct: t ? Math.round(c / t * 100) : 0 };
@@ -118,6 +126,7 @@
   function closeDrawer() {
     el('sidebar').classList.remove('open');
     el('scrim').classList.remove('on');
+    el('menuBtn').setAttribute('aria-expanded', 'false');
   }
 
   /* ---------------- tier bar ---------------- */
@@ -190,10 +199,11 @@
         h += `<figure class="figure">${F.svg}<figcaption>${esc(F.caption)}</figcaption></figure>`;
         return;
       }
-      const open = s.tier === 1 ? ' open' : (tierOn(s.tier) ? ' open' : '');
+      const isOpen = s.tier === 1 || tierOn(s.tier);
+      const open = isOpen ? ' open' : '';
       h += `<div id="sec-${m.id}-${si}" class="tierblock${tierOn(s.tier) ? '' : ' hide'}${open}" data-tier="${s.tier}" style="scroll-margin-top:110px">
-        <div class="tb-head" role="button" tabindex="0">${badge(s.tier)}<span>${esc(s.h)}</span><span class="caret">&#9654;</span></div>
-        <div class="tb-body">${s.html}</div></div>`;
+        <button type="button" class="tb-head" aria-expanded="${isOpen}" aria-controls="body-sec-${m.id}-${si}">${badge(s.tier)}<span>${esc(s.h)}</span><span class="caret" aria-hidden="true">&#9654;</span></button>
+        <div class="tb-body" id="body-sec-${m.id}-${si}">${s.html}</div></div>`;
     });
 
     // what we still don't know
@@ -207,9 +217,9 @@
         h += `<div class="quiz${tierOn(q.tier) ? '' : ' hide'}" data-q="${i}" data-mod="${m.id}">
           <div class="q-meta">${badge(q.tier)}<span class="q-count">Question ${i + 1}</span></div>
           <p class="q-stem">${esc(q.q)}</p>
-          <ul class="q-opts">${q.opts.map((o, j) =>
-            `<li class="q-opt" data-opt="${j}"><span class="key">${'ABCD'[j]}</span><span>${esc(o)}</span></li>`).join('')}</ul>
-          <div class="q-fb"></div></div>`;
+          <div class="q-opts" role="group" aria-label="Answer choices for question ${i + 1}">${q.opts.map((o, j) =>
+            `<button type="button" class="q-opt" data-opt="${j}"><span class="key" aria-hidden="true">${'ABCD'[j]}</span><span>${esc(o)}</span></button>`).join('')}</div>
+          <div class="q-fb" role="status" aria-live="polite"></div></div>`;
       });
     }
 
@@ -254,9 +264,11 @@
 
     // collapsible tier blocks
     document.querySelectorAll('.tb-head').forEach(hd => {
-      const toggle = () => hd.parentElement.classList.toggle('open');
+      const toggle = () => {
+        const expanded = hd.parentElement.classList.toggle('open');
+        hd.setAttribute('aria-expanded', String(expanded));
+      };
       hd.onclick = toggle;
-      hd.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } };
     });
 
     // quiz
@@ -270,19 +282,30 @@
       const reveal = (chosen) => {
         opts.forEach((o, j) => {
           o.classList.add('locked');
+          o.disabled = true;
           if (j === q.a) o.classList.add('correct');
           else if (j === chosen) o.classList.add('wrong');
         });
         const ok = chosen === q.a;
+        const chosenWhy = chosen >= 0 ? esc(q.why[chosen]) : 'Previously answered incorrectly.';
         fb.className = 'q-fb on ' + (ok ? 'good' : 'bad');
-        fb.innerHTML = `<strong>${ok ? 'Correct.' : 'Not quite.'}</strong> ${esc(q.why[chosen])}` +
-          (ok ? '' : `<br><br><strong>Why ${'ABCD'[q.a]} is right:</strong> ${esc(q.why[q.a])}`);
+        fb.innerHTML = `<strong>${ok ? 'Correct.' : 'Not quite.'}</strong> ${chosenWhy}` +
+          (ok ? '' : `<br><br><strong>Why ${'ABCD'[q.a]} is right:</strong> ${esc(q.why[q.a])}<br><button type="button" class="retry-quiz">Try again</button>`);
+        const retry = fb.querySelector('.retry-quiz');
+        if (retry) retry.onclick = () => {
+          opts.forEach(o => { o.classList.remove('locked', 'correct', 'wrong'); o.disabled = false; });
+          delete state.quiz[mi][qi];
+          saveState();
+          fb.className = 'q-fb'; fb.innerHTML = '';
+          opts[0].focus();
+        };
       };
 
       if (answered) {
         // we only stored correctness, so re-reveal against the correct answer
-        reveal(rec[qi] === true ? q.a : -1);
-        if (rec[qi] !== true) { fb.className = 'q-fb on bad'; fb.innerHTML = `<strong>Previously answered incorrectly.</strong> ${esc(q.why[q.a])}`; }
+        const saved = rec[qi];
+        const chosen = saved && typeof saved === 'object' ? saved.selected : (saved === true ? q.a : -1);
+        reveal(chosen);
       }
 
       opts.forEach((o, j) => {
@@ -290,7 +313,7 @@
           if (o.classList.contains('locked')) return;
           reveal(j);
           state.quiz[mi] = state.quiz[mi] || {};
-          state.quiz[mi][qi] = (j === q.a);
+          state.quiz[mi][qi] = { selected: j, correct: j === q.a };
           saveState();
         };
       });
@@ -334,6 +357,23 @@
     </div>
     <div class="wrap wrap-wide">`;
 
+    h += `<section class="card pathway-section" aria-labelledby="pathway-title">
+      <div class="eyebrow">Choose your route</div>
+      <h2 id="pathway-title">One course, three learning pathways</h2>
+      <p class="small muted">Select the depth that fits your role today. You can change it at any time without losing progress.</p>
+      <div class="path-grid">
+        ${C.certificates.map(c => {
+          const selected = c.tiers.length === state.tiers.length && c.tiers.every(t => tierOn(t));
+          return `<button type="button" class="path-card${selected ? ' selected' : ''}" data-pathway="${c.id}" aria-pressed="${selected}">
+            <span class="path-name">${esc(c.name.replace(' Certificate', ''))}</span>
+            <span class="path-time">~${duration(pathwayMinutes(c.tiers))}</span>
+            <span class="path-desc">${esc(c.desc)}</span>
+            <span class="path-action">${selected ? '&#10003; Current pathway' : 'Choose pathway'}</span>
+          </button>`;
+        }).join('')}
+      </div>
+    </section>`;
+
     h += `<div class="card"><div class="eyebrow">How this course is different</div>
       <p style="margin-bottom:10px">Every screen is tagged <strong>Must know</strong>, <strong>Nice to know</strong> or <strong>Good to know</strong>. Turn the tiers on and off in the bar above and the entire course reshapes itself &mdash; objectives, sections, readings and quiz items all filter together.</p>
       <div class="grid g3" style="margin-top:14px">
@@ -341,7 +381,7 @@
           ${badge(t)}<div style="font-family:var(--sans);font-weight:700;margin:6px 0 4px">${C.tiers[t].name}</div>
           <div class="small" style="color:var(--ink-2)">${esc(C.tiers[t].desc)}</div></div>`).join('')}
       </div>
-      <p class="note" style="margin-top:14px">Tier 1 alone is a complete twelve-hour foundation course with its own certificate. Nothing is orphaned when you filter.</p>
+      <p class="note" style="margin-top:14px">Tier 1 alone is a complete foundation course with its own certificate. Nothing is orphaned when you filter.</p>
     </div>`;
 
     if (p.done) h += `<div class="card"><div class="eyebrow">Your progress</div>
@@ -370,8 +410,19 @@
     h += `<div class="card" style="margin-top:30px"><div class="eyebrow">Evidence currency</div>
       <p class="small" style="margin-bottom:0">${esc(C.evidenceNote)} A published maintenance schedule with named trigger events is in <a href="#/about">About and currency</a>. Lipidology moves faster than course production cycles, so this course states its expiry conditions openly.</p></div>`;
 
+    h += `<p class="course-disclaimer"><strong>For education, not individual medical advice.</strong> Clinical decisions should use current local guidance, patient preferences and professional judgement.</p>`;
+
     h += `</div>`;
     el('main').innerHTML = h;
+    document.querySelectorAll('[data-pathway]').forEach(btn => {
+      btn.onclick = () => {
+        const cert = C.certificates.find(c => c.id === btn.dataset.pathway);
+        if (!cert) return;
+        state.tiers = [...cert.tiers];
+        saveState(); renderTierBar(); renderHome();
+        toast(`${cert.name} selected`);
+      };
+    });
     renderSidebar(null);
   }
 
@@ -442,6 +493,13 @@
       <div class="dt">Issued ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })} &middot; Course version ${C.version} &middot; Evidence current to ${esc(C.currentAsOf)}</div>
     </div>
 
+    <div class="card progress-backup"><div class="eyebrow">Keep your learning record</div>
+      <p class="small">Progress stays private on this device. Download a small backup to move it to another browser or protect it before clearing browser data.</p>
+      <div class="btnrow"><button class="btn ghost" id="exportBtn">Download progress backup</button>
+        <label class="btn ghost" for="importFile">Restore a backup</label>
+        <input class="visually-hidden" type="file" id="importFile" accept="application/json,.json"></div>
+    </div>
+
     <div class="btnrow"><button class="btn" onclick="window.print()">Print or save as PDF</button>
       <button class="btn ghost" id="resetBtn">Reset all progress</button></div>
 
@@ -451,6 +509,44 @@
     el('main').innerHTML = h;
     const inp = el('certName');
     inp.oninput = () => { state.name = inp.value; store.set('name', state.name); el('certNameOut').innerHTML = esc(state.name) || '&nbsp;'; };
+    el('exportBtn').onclick = () => {
+      const record = {
+        schema: 1,
+        course: C.title,
+        courseVersion: C.version,
+        exportedAt: new Date().toISOString(),
+        progress: { tiers: state.tiers, done: state.done, quiz: state.quiz, theme: state.theme, name: state.name }
+      };
+      const blob = new Blob([JSON.stringify(record, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = `cholesterol-mooc-progress-${new Date().toISOString().slice(0, 10)}.json`;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      toast('Progress backup downloaded');
+    };
+    el('importFile').onchange = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      try {
+        const record = JSON.parse(await file.text());
+        const p = record && record.progress;
+        if (record.schema !== 1 || !p || !Array.isArray(p.tiers) || !p.tiers.length ||
+            p.tiers.some(t => ![1, 2, 3].includes(t)) || !p.done || Array.isArray(p.done) ||
+            typeof p.done !== 'object' || !p.quiz || Array.isArray(p.quiz) || typeof p.quiz !== 'object') {
+          throw new Error('This is not a valid course progress backup.');
+        }
+        if (!confirm('Replace progress on this browser with the selected backup?')) return;
+        state.tiers = [...new Set(p.tiers)].sort(); state.done = p.done; state.quiz = p.quiz;
+        state.name = typeof p.name === 'string' ? p.name : '';
+        state.theme = p.theme === 'dark' ? 'dark' : 'light';
+        saveState(); store.set('name', state.name); store.set('theme', state.theme);
+        document.documentElement.setAttribute('data-theme', state.theme);
+        renderTierBar(); renderCertificate(); toast('Progress restored');
+      } catch (err) {
+        toast(err.message || 'Could not restore this backup');
+      } finally { e.target.value = ''; }
+    };
     el('resetBtn').onclick = () => {
       if (!confirm('Clear all progress, quiz answers and your name from this browser?')) return;
       state.done = {}; state.quiz = {}; state.name = '';
@@ -490,10 +586,10 @@
     <h2>Currency: named trigger events</h2>
     <p>Each of these will require specific modules to be revised. Check status before delivering the affected module.</p>
     <div class="tablewrap"><table><thead><tr><th>Trigger</th><th>Status at ${esc(C.currentAsOf)}</th><th>Modules affected</th></tr></thead><tbody>
-      <tr><td><strong>Lp(a)HORIZON (pelacarsen)</strong></td><td>Guided H1 2026; no published result located. <strong>Verify.</strong></td><td>7, 12, 13</td></tr>
-      <tr><td><strong>OCEAN(a)-Outcomes (olpasiran)</strong></td><td>Completion expected Q2 2026</td><td>12</td></tr>
-      <tr><td><strong>PREVAIL (obicetrapib)</strong></td><td>Completion expected late 2026</td><td>11, 12</td></tr>
-      <tr><td><strong>ORION-4 (inclisiran)</strong></td><td>Completing 2026</td><td>11</td></tr>
+      <tr><td><strong>Lp(a)HORIZON (pelacarsen)</strong></td><td>Topline 4 September 2026: Lp(a) lowered, cardiovascular primary endpoint not met. Full publication awaited.</td><td>7, 12, 13</td></tr>
+      <tr><td><strong>OCEAN(a)-Outcomes (olpasiran)</strong></td><td>Ongoing as of August 2026; no outcomes result available</td><td>12</td></tr>
+      <tr><td><strong>PREVAIL (obicetrapib)</strong></td><td>Interim analysis planned Q4 2026; result expected Q1 2027</td><td>11, 12</td></tr>
+      <tr><td><strong>ORION-4 (inclisiran)</strong></td><td>Cardiovascular outcomes pending</td><td>11</td></tr>
       <tr><td><strong>VICTORION-2P</strong></td><td>Expected 2027</td><td>11</td></tr>
       <tr><td><strong>CORALreef Outcomes (enlicitide)</strong></td><td>Ongoing, over 14,500 enrolled</td><td>11</td></tr>
       <tr><td><strong>HERMES / ARTEMIS (ziltivekimab)</strong></td><td>Topline H1 2027</td><td>6, 12</td></tr>
@@ -509,6 +605,10 @@
 
     <h2>A note on sources</h2>
     <div class="unknown"><p style="font-style:normal">${esc(V.hazard)}</p></div>
+
+    <h2>Course stewardship</h2>
+    <p>Created and maintained by <strong>Vikram S Kumar</strong> as a free, open medical-education resource. Corrections and constructive review are welcome through the <a href="https://github.com/vikramsakaleshpurkumar-byte/vikramsakaleshpurkumar-byte.github.io/issues" target="_blank" rel="noopener">public issue tracker</a>. Author identity: <a href="https://orcid.org/0000-0002-1369-7682" target="_blank" rel="noopener">ORCID 0000-0002-1369-7682</a>.</p>
+    <div class="flag warn"><strong>Educational scope.</strong> This course supports learning and clinical reasoning; it does not provide individual medical advice or replace current local guidelines, patient preferences, or professional judgement. Drug availability, indications and costs vary by jurisdiction and over time.</div>
 
     <h2>Licence and reuse</h2>
     <p>Figures and reference cards are intended for reuse in teaching under CC BY-NC attribution. If you adapt this course for another population, Module 13 is the template: substitute your own prevalence data, phenotype, guideline and drug prices, and the reasoning transfers intact.</p>
@@ -564,7 +664,7 @@
   }
 
   /* ---------------- router ---------------- */
-  function route() {
+  function route(moveFocus = false) {
     const h = location.hash || '#/';
     const m = h.match(/^#\/module\/(\d+)/);
     window.scrollTo(0, 0);
@@ -575,6 +675,15 @@
     else if (h.startsWith('#/references')) renderReferences();
     else if (h.startsWith('#/about')) renderAbout();
     else renderHome();
+    const activeModule = m && mod(+m[1]);
+    const sectionTitle = activeModule ? `Module ${activeModule.id}: ${activeModule.title}`
+      : h.startsWith('#/capstone') ? 'Capstone case portfolio'
+      : h.startsWith('#/certificate') ? 'Certificate'
+      : h.startsWith('#/references') ? 'Reference library'
+      : h.startsWith('#/about') ? 'About and currency'
+      : C.title;
+    document.title = sectionTitle === C.title ? C.title : `${sectionTitle} | ${C.title}`;
+    if (moveFocus) el('main').focus({ preventScroll: true });
     // Layout must settle before we can measure table overflow
     requestAnimationFrame(afterRender);
   }
@@ -626,10 +735,19 @@
       store.set('theme', state.theme);
       document.documentElement.setAttribute('data-theme', state.theme);
       el('themeBtn').innerHTML = state.theme === 'dark' ? '&#9788;' : '&#9789;';
+      el('themeBtn').setAttribute('aria-pressed', String(state.theme === 'dark'));
+      el('themeBtn').setAttribute('aria-label', state.theme === 'dark' ? 'Use light theme' : 'Use dark theme');
     };
     el('themeBtn').innerHTML = state.theme === 'dark' ? '&#9788;' : '&#9789;';
+    el('themeBtn').setAttribute('aria-pressed', String(state.theme === 'dark'));
+    el('themeBtn').setAttribute('aria-label', state.theme === 'dark' ? 'Use light theme' : 'Use dark theme');
 
-    el('menuBtn').onclick = () => { el('sidebar').classList.toggle('open'); el('scrim').classList.toggle('on'); };
+    el('menuBtn').onclick = () => {
+      const open = el('sidebar').classList.toggle('open');
+      el('scrim').classList.toggle('on', open);
+      el('menuBtn').setAttribute('aria-expanded', String(open));
+      if (open) { const first = el('sidebar').querySelector('button, input, a'); if (first) first.focus(); }
+    };
     el('scrim').onclick = closeDrawer;
 
     // Back to top — appears once the learner is well down a long module
@@ -640,12 +758,16 @@
     onScroll();
 
     window.addEventListener('resize', () => afterRender(), { passive: true });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && el('sidebar').classList.contains('open')) {
+        closeDrawer(); el('menuBtn').focus();
+      }
+    });
 
     renderTierBar();
     wireSearch();
     initPWA();
-    window.addEventListener('hashchange', route);
+    window.addEventListener('hashchange', () => route(true));
     route();
 
     // keyboard: left/right arrows navigate modules

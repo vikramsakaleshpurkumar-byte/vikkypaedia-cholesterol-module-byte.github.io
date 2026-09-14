@@ -164,7 +164,7 @@ That one character is the difference between your correction reaching learners a
 
 ## Two things before you announce it
 
-1. **Open the About page** in the live course (`#/about`) and work through the *unresolved* list. Lp(a)HORIZON especially — Module 12 should not be taught until you have confirmed whether it has reported.
+1. **Open the About page** in the live course (`#/about`) and review the evidence-status list. Lp(a)HORIZON reported a negative topline primary endpoint on 4 September 2026; full results remain pending.
 2. **Check the Module 13 guideline comparison table** against the four original documents. It is the asset most likely to be screenshotted and quoted back at you, so it needs to be right.
 
 Put your name and contact on the About page too — learners will want to send corrections, and you want them to.
