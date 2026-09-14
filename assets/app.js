@@ -607,7 +607,7 @@
     <div class="unknown"><p style="font-style:normal">${esc(V.hazard)}</p></div>
 
     <h2>Course stewardship</h2>
-    <p>Created and maintained by <strong>Vikram S Kumar</strong> as a free, open medical-education resource. Corrections and constructive review are welcome through the <a href="https://github.com/vikramsakaleshpurkumar-byte/vikramsakaleshpurkumar-byte.github.io/issues" target="_blank" rel="noopener">public issue tracker</a>. Author identity: <a href="https://orcid.org/0000-0002-1369-7682" target="_blank" rel="noopener">ORCID 0000-0002-1369-7682</a>.</p>
+    <p>Created and maintained by <strong>Vikram S Kumar</strong> as a free, open medical-education resource. Corrections and constructive review are welcome through the <a href="https://github.com/vikramsakaleshpurkumar-byte/vikkypaedia-cholesterol-module-byte.github.io/issues" target="_blank" rel="noopener">public issue tracker</a>. Author identity: <a href="https://orcid.org/0000-0002-1369-7682" target="_blank" rel="noopener">ORCID 0000-0002-1369-7682</a>.</p>
     <div class="flag warn"><strong>Educational scope.</strong> This course supports learning and clinical reasoning; it does not provide individual medical advice or replace current local guidelines, patient preferences, or professional judgement. Drug availability, indications and costs vary by jurisdiction and over time.</div>
 
     <h2>Licence and reuse</h2>
