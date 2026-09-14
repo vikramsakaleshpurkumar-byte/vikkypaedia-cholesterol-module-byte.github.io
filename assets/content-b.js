@@ -246,7 +246,7 @@ window.MODULES.push(
 <li>Highly atherogenic — but also strikingly responsive to fibrates, statins and weight loss. A satisfying diagnosis to make.</li>
 </ul>
 <h4>Elevated Lp(a)</h4>
-<p>Roughly 70-90% genetically determined, essentially unresponsive to lifestyle, and the strongest single genetic risk factor for premature coronary disease. No approved specific therapy as of August 2026 (see Module 12). Management is aggressive control of everything else that is modifiable, plus family screening.</p>` },
+<p>Roughly 70-90% genetically determined, essentially unresponsive to lifestyle, and the strongest single genetic risk factor for premature coronary disease. No approved specific therapy as of September 2026 (see Module 12). Management is aggressive control of everything else that is modifiable, plus family screening.</p>` },
     { tier: 3, h: "FH genotype and phenotype", html: `
 <div class="tablewrap"><table>
 <thead><tr><th>Gene</th><th>Inheritance</th><th>Share of monogenic FH</th><th>Note</th></tr></thead>
@@ -740,7 +740,7 @@ window.MODULES.push(
 <div class="keybox">
   <div class="eyebrow">Why this matters disproportionately for India and other LMICs</div>
   <p>Injectable PCSK9 inhibitors have been effectively unavailable to the great majority of Indian patients — cold chain, cost, and the practical difficulty of a fortnightly injection in a rural setting. An oral tablet with equivalent LDL-C efficacy changes the <em>long-run</em> calculus entirely, once patent expiry and generic manufacture arrive. It does not change this year's prescription. Teach it as the shape of the next decade.</p>
-  <p style="margin-top:8px"><strong>Caveat to hold firmly:</strong> as of August 2026 enlicitide has LDL-C data, not outcome data. CORALreef Outcomes is still running. Given the CTT log-linear relationship the expectation is favourable, but expectation is not evidence — and this course has already shown you niacin, torcetrapib and ziltivekimab.</p>
+  <p style="margin-top:8px"><strong>Caveat to hold firmly:</strong> as of September 2026 enlicitide has LDL-C data, not outcome data. CORALreef Outcomes is still running. Given the CTT log-linear relationship the expectation is favourable, but expectation is not evidence — and this course has already shown you niacin, torcetrapib and ziltivekimab.</p>
 </div>` },
     { tier: 2, h: "Inclisiran, sequestrants, fibrates, icosapent ethyl", html: `
 <h4>Inclisiran</h4>
@@ -855,12 +855,12 @@ window.MODULES.push(
 <li><strong>Inflammation remains real but stubbornly untreatable.</strong> The 2026 ZEUS result was a substantial setback.</li>
 </ol>` },
     { tier: 2, h: "Lp(a): the biggest open question in the field", html: `
-<div class="flag warn"><strong>State this clearly to learners before anything else:</strong> as of August 2026, <strong>it remains unproven that lowering Lp(a) reduces cardiovascular events.</strong> The 2025 ESC/EAS focused update says so explicitly. We have potent drugs and no outcome data. Teach the question, not a presumed answer.</div>
+<div class="flag warn"><strong>The field changed on 4 September 2026:</strong> Lp(a)HORIZON became the first major Lp(a)-lowering outcomes trial to report, and it was negative. Pelacarsen lowered Lp(a) but did not significantly reduce the composite of cardiovascular death, non-fatal myocardial infarction, non-fatal stroke and urgent coronary revascularisation versus placebo. This is a topline result, not yet a full peer-reviewed dataset. It does not prove that every Lp(a)-lowering strategy will fail; it does prove that biomarker lowering alone is not enough.</div>
 <div class="tablewrap"><table>
 <thead><tr><th>Agent</th><th>Modality</th><th>Lp(a) reduction</th><th>Outcome trial</th><th>Status</th></tr></thead>
 <tbody>
-<tr><td><strong>Pelacarsen</strong></td><td>Antisense oligonucleotide, 80 mg monthly</td><td class="num">Up to ~80%</td><td><strong>Lp(a)HORIZON</strong> — 8,323 secondary prevention patients, Lp(a) at or above 70 mg/dL</td><td>Phase 3 data guided to first half of 2026; regulatory submissions guided to second half. <strong>Verify current status before teaching.</strong></td></tr>
-<tr><td><strong>Olpasiran</strong></td><td>siRNA</td><td class="num">~94% at 36 weeks (phase 2)</td><td><strong>OCEAN(a)-Outcomes</strong> — over 7,200 patients, Lp(a) at or above 200 nmol/L</td><td>Completion expected Q2 2026; results anticipated by end 2026</td></tr>
+<tr><td><strong>Pelacarsen</strong></td><td>Antisense oligonucleotide, 80 mg monthly</td><td class="num">Up to ~80%</td><td><strong>Lp(a)HORIZON</strong> — 8,323 secondary prevention patients, Lp(a) at or above 70 mg/dL</td><td><strong>Primary endpoint not met</strong>, topline 4 September 2026. Lp(a) fell, but the cardiovascular composite was not significantly reduced. Full results awaited.</td></tr>
+<tr><td><strong>Olpasiran</strong></td><td>siRNA</td><td class="num">~94% at 36 weeks (phase 2)</td><td><strong>OCEAN(a)-Outcomes</strong> — over 7,200 patients, Lp(a) at or above 200 nmol/L</td><td>Phase 3 outcomes trial ongoing as of August 2026</td></tr>
 <tr><td><strong>Lepodisiran</strong></td><td>siRNA, very long acting</td><td class="num">Over 90%</td><td>ACCLAIM-Lp(a)</td><td>Phase 3</td></tr>
 <tr><td><strong>Zerlasiran</strong></td><td>siRNA</td><td class="num">Over 80%</td><td>—</td><td>Phase 2 complete</td></tr>
 <tr><td><strong>Muvalaplin</strong></td><td><strong>Oral small molecule</strong> — disrupts apo(a)-apoB assembly</td><td class="num">~65-85%</td><td>—</td><td>Phase 2. The oral option, if it works.</td></tr>
@@ -879,7 +879,7 @@ window.MODULES.push(
 <p><strong>Obicetrapib</strong> is a different proposition. It is a potent CETP inhibitor being developed explicitly as an <strong>LDL-C and apoB-lowering agent</strong>, with the HDL-C rise treated as incidental rather than as the mechanism of benefit. That is a materially different hypothesis from the one that failed four times.</p>
 <ul>
 <li><strong>BROADWAY</strong> and <strong>TANDEM</strong> (with ezetimibe): phase 3, positive on LDL-C.</li>
-<li><strong>PREVAIL</strong>: cardiovascular outcomes trial, 9,541 patients with established ASCVD on maximally tolerated therapy. Enrolment completed 2022; <strong>completion anticipated late 2026</strong>.</li>
+<li><strong>PREVAIL</strong>: cardiovascular outcomes trial, over 9,500 patients with established ASCVD on maximally tolerated therapy. Interim analysis is planned for Q4 2026, with a result expected in Q1 2027.</li>
 </ul>
 <p class="note">An intriguing side-signal: obicetrapib has been examined for effects on plasma p-tau217, raising questions about CETP inhibition and Alzheimer biology. Interesting; entirely unproven.</p>` },
     { tier: 3, h: "ZEUS — a null result worth an entire lecture", html: `
@@ -921,20 +921,21 @@ window.MODULES.push(
 </ul>
 <p>Other frontiers worth naming: <strong>ANGPTL3 silencing</strong> (zodasiran, solbinsiran) and <strong>apoC-III silencing</strong> (olezarsen, plozasiran) for the triglyceride and remnant axis; <strong>oral GLP-1 and incretin combinations</strong> reshaping the metabolic substrate on which dyslipidaemia sits.</p>` }
   ],
-  unknown: "Everything in this module. That is the point of it. The honest summary as of August 2026: we can lower Lp(a) by 90% and do not know whether it helps; we have a fourth CETP inhibitor and do not know whether it helps; we can edit PCSK9 permanently and do not know whether we should.",
+  unknown: "Everything in this module. That is the point of it. The honest summary as of September 2026: the first major Lp(a)-lowering outcomes trial was negative, but whether a different agent, degree, timing or population can improve outcomes remains unknown; we have a fourth CETP inhibitor and do not know whether it helps; we can edit PCSK9 permanently and do not know whether we should.",
   readings: [
     { tier: 2, cite: "Tsimikas S et al. Lipoprotein(a) reduction in persons with cardiovascular disease (pelacarsen phase 2). NEJM 2020;382:244-55.", why: "The dose-ranging study that set the phase 3 programme.", url: "" },
+    { tier: 2, cite: "Novartis. Lp(a)HORIZON phase 3 topline results, 4 September 2026.", why: "The first major Lp(a)-lowering outcomes result—and a reminder that target engagement is not clinical benefit.", url: "https://www.novartis.com/news/media-releases/novartis-announces-lpahorizon-phase-iii-topline-results-pelacarsen-patients-elevated-lpa-and-established-cardiovascular-disease-cvd" },
     { tier: 3, cite: "Nissen SE et al. Obicetrapib phase 3 programme (BROADWAY, TANDEM).", why: "The CETP second attempt, argued on LDL-C rather than HDL-C.", url: "" },
     { tier: 3, cite: "Ridker PM et al. Antiinflammatory therapy with canakinumab for atherosclerotic disease (CANTOS). NEJM 2017;377:1119-31.", why: "Read alongside the ZEUS result. The contrast is the lesson.", url: "" }
   ],
   quiz: [
-    { tier: 1, q: "As of August 2026, the correct statement about Lp(a)-lowering therapy is:",
-      opts: ["Pelacarsen is approved and reduces cardiovascular events", "Potent Lp(a)-lowering agents exist, but it remains unproven that lowering Lp(a) reduces cardiovascular events", "Lp(a) can be lowered effectively by diet and exercise", "Statins lower Lp(a) substantially"],
+    { tier: 1, q: "After the September 2026 Lp(a)HORIZON topline announcement, the correct statement about Lp(a)-lowering therapy is:",
+      opts: ["Pelacarsen is approved and reduces cardiovascular events", "Pelacarsen lowered Lp(a) but did not meet its cardiovascular primary endpoint; other outcome strategies remain under study", "Lp(a) can be lowered effectively by diet and exercise", "The negative trial proves Lp(a) is not a causal risk factor"],
       a: 1,
-      why: ["No Lp(a)-lowering agent had outcome data published as of August 2026.",
-            "Correct. Pelacarsen, olpasiran and others reduce Lp(a) by 80-95%, but Lp(a)HORIZON and OCEAN(a)-Outcomes had not reported. The 2025 ESC/EAS focused update states this explicitly. Teach the question honestly.",
+      why: ["Pelacarsen is not approved for cardiovascular risk reduction, and Lp(a)HORIZON did not meet its primary endpoint.",
+            "Correct. This is the disciplined interpretation of a topline negative trial: pelacarsen's biomarker effect did not translate into a significant reduction in the prespecified cardiovascular composite, while other agents and the full dataset remain under study.",
             "Lp(a) is roughly 70-90% genetically determined and barely responds to lifestyle.",
-            "Statins do not lower Lp(a); some data suggest a small increase."] },
+            "A negative drug trial can reflect the agent, dose, timing, population or target; it does not by itself overturn the broader genetic and epidemiological evidence for Lp(a) as a risk factor."] },
     { tier: 2, q: "Obicetrapib differs from the failed first-generation CETP inhibitors principally in that it is being developed as:",
       opts: ["An HDL-C-raising agent with better tolerability", "An LDL-C and apoB-lowering agent, with the HDL-C rise treated as incidental", "A triglyceride-lowering agent", "An anti-inflammatory agent"],
       a: 1,
@@ -945,7 +946,7 @@ window.MODULES.push(
     { tier: 2, q: "A patient has LDL-C at goal on rosuvastatin and ezetimibe, but Lp(a) is 145 nmol/L. The correct management today is:",
       opts: ["Start pelacarsen", "Add niacin to lower Lp(a)", "Aggressively optimise every modifiable risk factor and screen first-degree relatives", "Reassure — Lp(a) is not a real risk factor"],
       a: 2,
-      why: ["Not available outside trials as of August 2026.",
+      why: ["Pelacarsen is not approved for this use, and its phase 3 cardiovascular primary endpoint was negative.",
             "Niacin lowers Lp(a) modestly but has been shown to be ineffective and harmful in outcome trials. Do not use it.",
             "Correct. Drive LDL-C lower still, control blood pressure, stop smoking, manage diabetes — and screen the family, because Lp(a) is inherited and the relatives do not know. Unsatisfying but correct, and honesty about the limits of what we can offer is part of good teaching.",
             "Lp(a) is the strongest known genetic risk factor for premature coronary disease. This is wrong."] },

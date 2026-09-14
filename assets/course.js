@@ -5,9 +5,9 @@
 window.COURSE = {
   title: "Cholesterol: From Molecule to Management",
   subtitle: "A tiered, evidence-anchored course in lipid biology, dyslipidaemia and lipid-lowering therapy.",
-  version: "1.0",
-  currentAsOf: "August 2026",
-  evidenceNote: "Evidence current to August 2026: 2026 ACC/AHA Dyslipidemia Guideline, 2025 ESC/EAS Focused Update, LAI Consensus Statement IV, CSI 2024, VESALIUS-CV, ZEUS, enlicitide approval.",
+  version: "1.1",
+  currentAsOf: "September 2026",
+  evidenceNote: "Evidence current to September 2026: 2026 ACC/AHA Dyslipidemia Guideline, 2025 ESC/EAS Focused Update, LAI Consensus Statement IV, CSI 2024, VESALIUS-CV, ZEUS, enlicitide approval, and the negative Lp(a)HORIZON topline result.",
   parts: [
     { n: 1, roman: "I",   name: "The Molecule",          blurb: "Structure, synthesis, absorption." },
     { n: 2, roman: "II",  name: "The Traffic System",    blurb: "Lipoproteins, physiology, atherogenesis." },
@@ -22,7 +22,7 @@ window.COURSE = {
   },
   certificates: [
     { id: "foundation", name: "Foundation Certificate", tiers: [1], pass: 70,
-      desc: "Tier 1 across all 14 modules. A complete 12-hour grounding for students, interns, allied health and informed learners." },
+      desc: "Tier 1 across all 14 modules. An approximately 11-hour grounding for students, interns, allied health and informed learners." },
     { id: "practitioner", name: "Practitioner Certificate", tiers: [1,2], pass: 75,
       desc: "Tiers 1 and 2. For residents, GPs, clinical pharmacists and dietitians who make lipid decisions." },
     { id: "advanced", name: "Advanced Certificate", tiers: [1,2,3], pass: 80,
@@ -92,6 +92,7 @@ window.REFERENCES = [
     { cite: "JUPITER; CANTOS; COLCOT / LoDoCo2; ZEUS (2026, null) — the inflammation arc.", url: "https://www.tctmd.com/news/zeus-trial-ziltivekimab-fails-reduce-mace-ascvd-patients" },
     { cite: "SAMSON. Wood FA et al. NEJM 2020;383:2182-4; StatinWISE. Herrett E et al. BMJ 2021;372:n135.", url: "https://pubmed.ncbi.nlm.nih.gov/33196154/" },
     { cite: "CORALreef Lipids and CORALreef HeFH — enlicitide. FDA approval 16 July 2026.", url: "https://www.tctmd.com/news/fda-approves-enlicitide-oral-pcsk9-inhibitor-ldl-lowering" },
+    { cite: "Lp(a)HORIZON — pelacarsen did not meet its cardiovascular primary endpoint despite lowering Lp(a). Novartis topline announcement, 4 September 2026.", url: "https://www.novartis.com/news/media-releases/novartis-announces-lpahorizon-phase-iii-topline-results-pelacarsen-patients-elevated-lpa-and-established-cardiovascular-disease-cvd" },
     { cite: "AIM-HIGH; HPS2-THRIVE; the torcetrapib / dalcetrapib / evacetrapib series — the surrogate-endpoint cautionary canon.", url: "" }
   ]},
   { group: "India-specific", items: [
@@ -121,13 +122,14 @@ window.VERIFY_NOTES = {
     "ICMR-INDIAB-25: 213.3 million and 185.7 million.",
     "LAI extreme risk categories A and B with the 30 mg/dL goals — Consensus Statement IV.",
     "CSI 2024: non-fasting advocated; very high risk under 55 mg/dL or non-HDL under 85.",
-    "Approximately 25 percent of South Asians with Lp(a) above 50 mg/dL; MI about 10 years earlier; PCE classified South Asians as White."
+    "Approximately 25 percent of South Asians with Lp(a) above 50 mg/dL; MI about 10 years earlier; PCE classified South Asians as White.",
+    "Lp(a)HORIZON topline result, 4 September 2026: pelacarsen lowered Lp(a) but did not reduce the composite cardiovascular primary endpoint versus placebo; full results remain pending."
   ],
   pending: [
-    "Lp(a)HORIZON (pelacarsen) — guided to H1 2026 with submissions H2 2026, but no published primary result was locatable as of 19 August 2026. Confirm before delivering Module 12.",
-    "OCEAN(a)-Outcomes (olpasiran) — completion expected Q2 2026; publication anticipated by end 2026.",
-    "PREVAIL (obicetrapib) — completion expected late 2026.",
-    "ORION-4 (inclisiran) — completing 2026. VICTORION-2P expected 2027.",
+    "Lp(a)HORIZON (pelacarsen) — topline primary endpoint was negative; full peer-reviewed results and prespecified subgroup analyses remain pending.",
+    "OCEAN(a)-Outcomes (olpasiran) — confirmed ongoing by Amgen in August 2026; no outcomes result available.",
+    "PREVAIL (obicetrapib) — interim analysis planned for Q4 2026, with a result expected in Q1 2027.",
+    "ORION-4 (inclisiran) — cardiovascular outcomes remain pending. VICTORION-2P is also ongoing.",
     "CORALreef Outcomes (enlicitide) — ongoing, over 14,500 enrolled.",
     "HERMES and ARTEMIS (ziltivekimab) — topline H1 2027.",
     "LAI extreme-risk sub-categories: one secondary source referenced a category C with an ultra-low 10-15 mg/dL goal. This could not be corroborated and has been deliberately EXCLUDED. Read the CS-IV target table directly before teaching it.",

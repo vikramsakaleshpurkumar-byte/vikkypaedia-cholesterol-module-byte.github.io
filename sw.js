@@ -9,7 +9,7 @@
    most common mistake with service workers, so it is worth a calendar note.
    ========================================================================== */
 
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';
 const CACHE = 'cholesterol-mooc-' + CACHE_VERSION;
 
 const SHELL = [

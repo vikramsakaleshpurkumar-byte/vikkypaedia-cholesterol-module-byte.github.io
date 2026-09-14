@@ -4,7 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cholesterol: From Molecule to Management</title>
-<meta name="description" content="A tiered, evidence-anchored course in lipid biology, dyslipidaemia and lipid-lowering therapy. Global core with a dedicated India module. Evidence current to August 2026.">
+<meta name="description" content="A free, tiered course in lipid biology, dyslipidaemia and lipid-lowering therapy, with interactive tools, clinical cases and a dedicated India module. Evidence current to September 2026.">
+<meta name="author" content="Vikram S Kumar">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://vikramsakaleshpurkumar-byte.github.io/">
 <meta name="theme-color" content="#10243d" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0b1622" media="(prefers-color-scheme: dark)">
 
@@ -20,15 +23,43 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Cholesterol: From Molecule to Management">
 <meta property="og:description" content="From the mevalonate pathway to the 2026 ACC/AHA guideline. Three depth tiers in one course. Free, open, works offline.">
-<meta name="twitter:card" content="summary">
+<meta property="og:url" content="https://vikramsakaleshpurkumar-byte.github.io/">
+<meta property="og:image" content="https://vikramsakaleshpurkumar-byte.github.io/social-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cholesterol: From Molecule to Management — a free, evidence-anchored course">
+<meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Cholesterol: From Molecule to Management",
+  "description": "A free, tiered and evidence-anchored course in lipid biology, dyslipidaemia and lipid-lowering therapy.",
+  "url": "https://vikramsakaleshpurkumar-byte.github.io/",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "provider": {
+    "@type": "Person",
+    "name": "Vikram S Kumar",
+    "sameAs": "https://orcid.org/0000-0002-1369-7682"
+  },
+  "hasCourseInstance": {
+    "@type": "CourseInstance",
+    "courseMode": "online",
+    "courseWorkload": "PT11H"
+  }
+}
+</script>
 </head>
 <body>
 
+<a class="skip-link" href="#main">Skip to course content</a>
+
 <header class="hdr">
-  <button class="icon-btn" id="menuBtn" aria-label="Open course menu">&#9776;</button>
+  <button class="icon-btn" id="menuBtn" aria-label="Open course menu" aria-expanded="false" aria-controls="sidebar">&#9776;</button>
   <a class="hdr-brand" href="#/">
     <span class="mark" aria-hidden="true"></span>
     <span class="full">Cholesterol: From Molecule to Management</span>
@@ -39,7 +70,7 @@
     <input type="search" id="search" placeholder="Search the course…" aria-label="Search the course" autocomplete="off">
     <div class="search-results" id="searchResults"></div>
   </div>
-  <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode">&#9789;</button>
+  <button class="icon-btn" id="themeBtn" aria-label="Use dark theme" aria-pressed="false">&#9789;</button>
 </header>
 
 <div class="tierbar" id="tierbar"></div>
@@ -48,7 +79,7 @@
 
 <div class="shell">
   <nav class="sidebar" id="sidebar" aria-label="Course navigation"></nav>
-  <main class="main" id="main">
+  <main class="main" id="main" tabindex="-1">
     <div class="wrap"><p class="muted">Loading course…</p></div>
   </main>
 </div>

@@ -318,7 +318,7 @@ window.TOOLS = {
       ];
       let extra = '';
       if (has('southasian')) extra += `<div class="flag warn"><strong>South Asian ancestry is a recognised risk-enhancing factor</strong>, and no major calculator was derived in an Indian cohort. The Pooled Cohort Equations classified South Asians as White and underestimated risk; PREVENT removed race entirely, correcting the classification problem but not the calibration problem. This is precisely why the LAI uses lifetime risk.</div>`;
-      if (has('lpa')) extra += `<div class="flag warn"><strong>Elevated Lp(a)</strong> is a risk modifier in the 2025 ESC/EAS focused update (threshold above 50 mg/dL or above 105 nmol/L) and is to be measured once in adulthood per the 2026 ACC/AHA guideline. There is no approved Lp(a)-lowering therapy as of August 2026 — so intensify everything modifiable, and screen the family.</div>`;
+      if (has('lpa')) extra += `<div class="flag warn"><strong>Elevated Lp(a)</strong> is a risk modifier in the 2025 ESC/EAS focused update (threshold above 50 mg/dL or above 105 nmol/L) and is to be measured once in adulthood per the 2026 ACC/AHA guideline. There is no approved Lp(a)-lowering therapy as of September 2026; Lp(a)HORIZON's cardiovascular primary endpoint was negative despite biomarker lowering. Intensify everything modifiable and screen the family.</div>`;
       $('#rc-out', root).innerHTML = `<div class="tablewrap"><table><thead><tr><th>Guideline</th><th>Category</th><th>LDL-C goal</th><th>Risk tool</th></tr></thead><tbody>` +
         rows.map(([g, v, t]) => `<tr><td><strong>${g}</strong></td><td>${v[0]}</td><td><strong>${v[1]}</strong></td><td class="muted small">${t}</td></tr>`).join('') +
         `</tbody></table></div>` + extra;

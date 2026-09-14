@@ -4,7 +4,7 @@
 
 *A free, self-paced course in lipid biology, dyslipidaemia and lipid-lowering therapy — from the mevalonate pathway to the 2026 ACC/AHA guideline. Global core with a dedicated India module.*
 
-**Evidence current to August 2026** · 14 modules · 3 depth tiers · 88 quiz items · 10 interactive tools · Works offline
+**Evidence current to September 2026** · 14 modules · 3 depth tiers · 86 quiz items · 10 interactive tools · Works offline
 
 ---
 
@@ -45,7 +45,7 @@ Then open **http://localhost:8080**.
 
 No server installed? Just double-click `index.html`. Everything works from the file system — you simply cannot share it over the network that way.
 
-**After any edit, open http://localhost:8080/check.html.** It runs 20 structural checks over your content and tells you exactly what broke. Use it every time.
+**After any edit, open http://localhost:8080/check.html.** It runs 21 structural checks over your content and tells you exactly what broke. Use it every time.
 
 ---
 
@@ -227,11 +227,11 @@ Then reference it from a module: `{ tool: 'my-tool' }`. Always scope selectors w
 
 ## 7. Before you launch
 
-- [ ] Run `check.html` — all 20 checks green.
+- [ ] Run `check.html` — all 21 checks green.
 - [ ] After **every** future content edit, bump `CACHE_VERSION` in `sw.js` (`'v1'` → `'v2'`). The course is cached on learners' devices for offline use, so without this your correction never reaches them.
-- [ ] Read **`#/about`** and work through the *pending verification* list. Several items — Lp(a)HORIZON in particular — must be confirmed against the primary source before you teach Module 12.
+- [ ] Read **`#/about`** and review the evidence-status list before teaching Module 12. Lp(a)HORIZON reported a negative topline primary endpoint on 4 September 2026; full results remain pending.
 - [ ] Verify every cell of the guideline comparison table (Module 13) against the four original documents. It is your most-shared asset and the one most likely to be quoted back at you.
-- [ ] Put your name, institution and contact on the About page.
+- [x] Publish maintainer identity, ORCID and a public correction channel on the About page.
 - [ ] Test on a real phone over mobile data, not just on desktop.
 - [ ] Pilot with 20 learners spanning all three tiers. **Ask specifically about tier placement** — mis-tiered content is the failure mode most likely to sink this design, and it is invisible to the author.
 
@@ -255,4 +255,4 @@ Be clear-eyed. You will not out-produce Coursera on video. What this platform do
 
 Content and figures are intended for reuse in teaching under **CC BY-NC**. Attribution to the author. Adapting this for another country is straightforward: Module 13 is the template — substitute your own prevalence data, phenotype, national guideline and drug prices, and the reasoning transfers intact.
 
-*Evidence current to August 2026. Course version 1.0. See `#/about` for the maintenance schedule and the full verification log.*
+*Evidence current to September 2026. Course version 1.1. See `#/about` for the maintenance schedule and the full verification log.*

@@ -169,7 +169,7 @@
 
   render();
 
-  // These four need a real server (fetch is blocked on file://).
+  // These checks need a real server (fetch is blocked on file://).
   // app.js in particular cannot be executed here — it expects the course DOM —
   // so we parse-check it with new Function() without running it.
   if (location.protocol.startsWith('http')) {
@@ -202,11 +202,15 @@
 
       fetch('icon.svg').then(r => {
         t('icon.svg present', () => r.ok ? true : 'returned ' + r.status);
-      }).catch(() => t('icon.svg present', () => 'missing — home-screen icon will fall back to a default'))
+      }).catch(() => t('icon.svg present', () => 'missing — home-screen icon will fall back to a default')),
+
+      fetch('social-card.png').then(r => {
+        t('LinkedIn/social share image present', () => r.ok ? true : 'returned ' + r.status);
+      }).catch(() => t('LinkedIn/social share image present', () => 'missing — shared links will have no large preview image'))
     ]).then(render);
   } else {
     out.insertAdjacentHTML('beforeend',
-      '<div class="row"><span class="tag">SKIP</span><span>4 further checks (app.js syntax, manifest, service worker, icon) need a server &mdash; run <code>serve.bat</code> and open <code>http://localhost:8080/check.html</code>, or check the live site after deploying</span></div>');
+      '<div class="row"><span class="tag">SKIP</span><span>5 further checks (app.js syntax, manifest, service worker, icons and social image) need a server &mdash; run <code>serve.bat</code> and open <code>http://localhost:8080/check.html</code>, or check the live site after deploying</span></div>');
   }
 
   function render(){
