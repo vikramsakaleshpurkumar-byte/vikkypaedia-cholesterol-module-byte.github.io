@@ -4,28 +4,20 @@ Written for your account, `vikramsakaleshpurkumar-byte`. No Git, no command line
 
 ---
 
-## First, one decision (30 seconds)
+## Your live course
 
-You have two sensible URLs. Pick one before you start.
+| Repository name | Course URL |
+|---|---|
+| `vikkypaedia-cholesterol-module-byte.github.io` | `https://vikramsakaleshpurkumar-byte.github.io/vikkypaedia-cholesterol-module-byte.github.io/` |
 
-| | Repository name | Your course URL |
-|---|---|---|
-| **A — recommended** | `vikramsakaleshpurkumar-byte.github.io` | `https://vikramsakaleshpurkumar-byte.github.io` |
-| **B** | `cholesterol-mooc` | `https://vikramsakaleshpurkumar-byte.github.io/cholesterol-mooc/` |
-
-**Take A.** It is shorter, far easier to read out loud in a lecture, and easier for learners to type on a phone. GitHub gives every account exactly one of these "user site" repositories and yours is unused.
-
-If you later add a second course, you keep the same repo and put it in a subfolder — `.../pharmacology/` and so on. So choosing A now costs you nothing later.
-
-The rest of this guide assumes A.
+The course is already deployed. Keep the repository name and public URL above aligned with the canonical and social-sharing metadata in `index.html`.
 
 ---
 
 ## Step 1 — Create the repository
 
 1. Go to **https://github.com/new**
-2. **Repository name:** type exactly `vikramsakaleshpurkumar-byte.github.io`
-   *(It must match your username exactly, including the `-byte`, or GitHub will not treat it as your user site.)*
+2. **Repository name:** use `vikkypaedia-cholesterol-module-byte.github.io`
 3. **Public** — required, because Pages is free only from public repositories.
 4. Leave "Add a README file" **unticked**. You already have one.
 5. Click **Create repository**.
@@ -82,10 +74,10 @@ Wait about two minutes, then reload that Settings → Pages screen. A green bann
 **Before you tell anyone, open this:**
 
 ```
-https://vikramsakaleshpurkumar-byte.github.io/check.html
+https://vikramsakaleshpurkumar-byte.github.io/vikkypaedia-cholesterol-module-byte.github.io/check.html
 ```
 
-All 20 checks must be green. This is the only verification step that matters — it parses every content file and confirms nothing is broken. If something is red, it names the file and the problem.
+All 21 checks must be green. This page parses every content file and confirms that the course, tools, metadata and social preview are intact. If something is red, it names the file and the problem.
 
 Then open the course itself and click through a couple of modules.
 
@@ -125,7 +117,7 @@ Send this, exactly:
 
 > **Cholesterol: From Molecule to Management**
 > A free, self-paced course — basic biochemistry through to the 2026 guidelines and lipid-lowering drugs.
-> 👉 https://vikramsakaleshpurkumar-byte.github.io
+> 👉 https://vikramsakaleshpurkumar-byte.github.io/vikkypaedia-cholesterol-module-byte.github.io/
 >
 > Three depth settings. Tap **Must know / Nice to know / Good to know** at the top to match your level — students start with Must know only.
 > Works on any phone. Android users can install it for offline use; iPhone users tap Share → Add to Home Screen.

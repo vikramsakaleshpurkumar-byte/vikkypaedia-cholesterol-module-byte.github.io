@@ -1,6 +1,6 @@
 # Cholesterol: From Molecule to Management
 
-### ▶︎ **[Open the course](https://vikramsakaleshpurkumar-byte.github.io)**
+### ▶︎ **[Open the course](https://vikramsakaleshpurkumar-byte.github.io/vikkypaedia-cholesterol-module-byte.github.io/)**
 
 *A free, self-paced course in lipid biology, dyslipidaemia and lipid-lowering therapy — from the mevalonate pathway to the 2026 ACC/AHA guideline. Global core with a dedicated India module.*
 
